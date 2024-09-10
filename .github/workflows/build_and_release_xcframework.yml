@@ -35,9 +35,14 @@ jobs:
         chmod +x ./build_xcframework.sh
         ./build_xcframework.sh
 
-    - name: Get version from tag
+    - name: Get version
       id: get_version
-      run: echo ::set-output name=VERSION::${GITHUB_REF#refs/tags/}
+      run: |
+        if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+          echo ::set-output name=VERSION::${{ github.event.inputs.release_version }}
+        else
+          echo ::set-output name=VERSION::${GITHUB_REF#refs/tags/}
+        fi
 
     - name: Get checksum
       id: get_checksum
