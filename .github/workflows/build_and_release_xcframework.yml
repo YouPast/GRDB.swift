@@ -3,7 +3,17 @@ name: Build and Release XCFramework
 on:
   push:
     tags:
-      - 'v*' # Trigger on version tags
+      - 'build*' # Trigger on version tags
+  workflow_dispatch:
+    inputs:
+      release_version:
+        description: 'Release version (e.g., v1.0.0)'
+        required: true
+      prerelease:
+        description: 'Is this a pre-release?'
+        required: true
+        type: boolean
+        default: false
 
 jobs:
   build-and-release:
