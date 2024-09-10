@@ -2,14 +2,15 @@ name: Sync Fork
 
 on:
   schedule:
-    - cron: '*/30 * * * *' # every 30 minutes
+    - cron: '0 0 1 * *'  # This runs at midnight on the 1st of every month
   workflow_dispatch: # on button click
 
 jobs:
   sync:
     runs-on: ubuntu-latest
     permissions:
+      contents: write
       pull-requests: write
     steps:
-      - uses: tgymnich/fork-sync@v1.8
+      - uses: tgymnich/fork-sync@latest
 
