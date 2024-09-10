@@ -18,7 +18,10 @@ on:
 jobs:
   build-and-release:
     runs-on: macos-latest
-
+    permissions:
+      contents: write
+      pull-requests: write
+      repository-projects: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
