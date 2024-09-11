@@ -49,7 +49,7 @@ echo "XCFramework created at ${OUTPUT_PATH}/${FRAMEWORK_NAME}.xcframework"
 
 # After creating the XCFramework, zip it
 ZIP_NAME="${FRAMEWORK_NAME}.xcframework.zip"
-zip -r "${ZIP_NAME}" "${OUTPUT_PATH}/${FRAMEWORK_NAME}.xcframework"
+(cd ${OUTPUT_PATH} && zip -r ../"${ZIP_NAME}" "${FRAMEWORK_NAME}.xcframework")
 
 # Generate checksum using swift package
 CHECKSUM=$(swift package compute-checksum "${ZIP_NAME}")
