@@ -48,8 +48,7 @@ rm -rf "${OUTPUT_PATH}/macOS.xcarchive"
 echo "XCFramework created at ${OUTPUT_PATH}/${FRAMEWORK_NAME}.xcframework"
 
 # After creating the XCFramework, zip it
-timestap=$(date +%s) # get rid of CDN caching
-ZIP_NAME="${FRAMEWORK_NAME}-${timestap}.xcframework.zip"
+ZIP_NAME="${FRAMEWORK_NAME}.xcframework.zip"
 (cd ${OUTPUT_PATH} && zip -r ../"${ZIP_NAME}" "${FRAMEWORK_NAME}.xcframework")
 
 # Generate checksum using swift package

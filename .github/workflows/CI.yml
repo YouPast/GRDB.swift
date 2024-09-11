@@ -4,26 +4,26 @@ name: "GRDB CI"
 
 on:
   push:
-    branches: 
+    branches:
       - master
       - development
     paths:
-      - 'GRDB/**'
-      - 'Tests/**'
-      - '.github/workflows/**'
-      - 'Makefile'
-      - 'Package.swift'
-      - 'SQLiteCustom/src'
+      - "GRDB/**"
+      - "Tests/**"
+      - ".github/workflows/CI.yml"
+      - "Makefile"
+      - "Package.swift"
+      - "SQLiteCustom/src"
   pull_request:
     paths:
-      - 'GRDB/**'
-      - 'Tests/**'
-      - '.github/workflows/**'
-      - 'Makefile'
-      - 'Package.swift'
-      - 'SQLiteCustom/src'
+      - "GRDB/**"
+      - "Tests/**"
+      - ".github/workflows/**"
+      - "Makefile"
+      - "Package.swift"
+      - "SQLiteCustom/src"
 
-concurrency: 
+concurrency:
   group: ${{ github.ref_name }}
   cancel-in-progress: true
 permissions:
@@ -186,4 +186,3 @@ jobs:
       - uses: actions/checkout@v4
       - name: ${{ matrix.name }}
         run: make test_universal_xcframework
-    
