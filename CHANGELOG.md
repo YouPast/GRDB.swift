@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 
 GRDB adheres to [Semantic Versioning](https://semver.org/), with one exception: APIs flagged [**:fire: EXPERIMENTAL**](README.md#what-are-experimental-features). Those are unstable, and may break between any two minor releases of the library.
 
+#### 7.x Releases
+
+- `7.0.0` Betas - [7.0.0-beta](#700-beta) - [7.0.0-beta.2](#700-beta2) - [7.0.0-beta.3](#700-beta3) - [7.0.0-beta.4](#700-beta4) - [7.0.0-beta.5](#700-beta5) - [7.0.0-beta.6](#700-beta6)
+
 #### 6.x Releases
 
 - `6.29.x` Releases - [6.29.0](#6290) - [6.29.1](#6291) - [6.29.2](#6292) - [6.29.3](#6293)
@@ -126,6 +130,65 @@ GRDB adheres to [Semantic Versioning](https://semver.org/), with one exception: 
 - [0.110.0](#01100), ...
 
 ---
+
+## 7.0.0-beta.6
+
+Released October 13, 2024
+
+- **New**: Bump custom SQLite builds to 3.46.1 by [@groue](https://github.com/groue) in [#1654](https://github.com/groue/GRDB.swift/pull/1654)
+
+## 7.0.0-beta.5
+
+Released October 13, 2024
+
+- **Fixed**: Fix DatabaseMigrator.hasSchemaChanges failing for readonly connections by [@Jnosh](https://github.com/Jnosh) in [#1653](https://github.com/groue/GRDB.swift/pull/1653)
+- **Documentation Update**: Enhance the database schema documentation by [@groue](https://github.com/groue) in [#1652](https://github.com/groue/GRDB.swift/pull/1652)
+
+## 7.0.0-beta.4
+
+Released October 12, 2024
+
+- **New**: Allow applications to handle DatabaseMigrator schema changes by [@groue](https://github.com/groue) in [#1651](https://github.com/groue/GRDB.swift/pull/1651)
+
+## 7.0.0-beta.3
+
+Released October 6, 2024
+
+- **Fix**: use #if directives to conditionally @preconcurrency import the Dispatch module to enable building the package on linux by [@tayloraswift](https://github.com/tayloraswift) in [#1644](https://github.com/groue/GRDB.swift/pull/1644)
+- **New**: Add coalesce free function and Row method by [@philmitchell](https://github.com/philmitchell) in [#1645](https://github.com/groue/GRDB.swift/pull/1645)
+- **Documentation Update**: Add `DatabaseValueConvertible` tip for JSON columns by [@bok-](https://github.com/bok-) in [#1649](https://github.com/groue/GRDB.swift/pull/1649)
+
+## 7.0.0-beta.2
+
+Released September 29, 2024
+
+- **Fix**: Update .spi.yml by [@finestructure](https://github.com/finestructure) in [#1643](https://github.com/groue/GRDB.swift/pull/1643)
+
+## 7.0.0-beta
+
+Released September 29, 2024
+
+**GRDB 7 brings full support for Swift 6.**
+
+[Migrating From GRDB 6 to GRDB 7](Documentation/GRDB7MigrationGuide.md) describes in detail how to bump the GRDB version in your application.
+
+The new [Swift Concurrency and GRDB](https://swiftpackageindex.com/groue/grdb.swift/v7.0.0-beta.6/documentation/grdb/swiftconcurrency) guide explains how to best integrate GRDB and Swift Concurrency.
+
+The [demo app](Documentation/DemoApps/) was rewritten from scratch in a brand new Xcode 16 project.
+
+- **Breaking Change**: Bump requirements by [@groue](https://github.com/groue) in [#1598](https://github.com/groue/GRDB.swift/pull/1598) and [#1634](https://github.com/groue/GRDB.swift/pull/1634)
+- **Breaking Change**: Enhance ergonomics of record methods that insert/save/upsert and fetch by [@groue](https://github.com/groue) in [#1599](https://github.com/groue/GRDB.swift/pull/1599)
+- **Breaking Change**: Rename the CSQLite module to GRDBSQLite, and stop exporting the C SQLite functions by [@groue](https://github.com/groue) in [#1600](https://github.com/groue/GRDB.swift/pull/1600)
+- **Breaking Change**: Perform all writes with immediate transactions by default by [@groue](https://github.com/groue) in [#1602](https://github.com/groue/GRDB.swift/pull/1602)
+- **Breaking Change**: Remove DatabasePool.concurrentRead by [@groue](https://github.com/groue) in [#1603](https://github.com/groue/GRDB.swift/pull/1603)
+- **Breaking Change**: Coding strategies depend on the column by [@groue](https://github.com/groue) in [#1606](https://github.com/groue/GRDB.swift/pull/1606)
+- **Breaking Change**: Add missing Sendable conformances by [@groue](https://github.com/groue) in [#1607](https://github.com/groue/GRDB.swift/pull/1607) and [#1639](https://github.com/groue/GRDB.swift/pull/1639)
+- **Breaking Change**: Async database accesses honor Task cancellation by [@groue](https://github.com/groue) in [#1610](https://github.com/groue/GRDB.swift/pull/1610)
+- **Breaking Change**: Prefer Collection over Sequence for filter(keys:) and related APIs by [@groue](https://github.com/groue) in [#1617](https://github.com/groue/GRDB.swift/pull/1617)
+- **Breaking Change**: MainActor ValueObservation scheduling by [@groue](https://github.com/groue) in [#1633](https://github.com/groue/GRDB.swift/pull/1633)
+- **Breaking Change**: Prefer any DatabaseReader and DatabaseWriter by [@groue](https://github.com/groue) in [#1635](https://github.com/groue/GRDB.swift/pull/1635)
+- **New**: Sendable database accesses by [@groue](https://github.com/groue) in [#1618](https://github.com/groue/GRDB.swift/pull/1618)
+- **New**: DatabaseCursor has a primary associated type by [@groue](https://github.com/groue) in [#1605](https://github.com/groue/GRDB.swift/pull/1605)
 
 ## 6.29.3
 

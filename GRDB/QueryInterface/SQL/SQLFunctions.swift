@@ -34,7 +34,7 @@ public func average(
 /// // AVG(length) FILTER (WHERE length > 0)
 /// average(Column("length"), filter: Column("length") > 0)
 /// ```
-@available(iOS 14, macOS 10.16, tvOS 14, watchOS 7, *) // SQLite 3.30+
+@available(iOS 14, macOS 10.16, tvOS 14, *) // SQLite 3.30+
 public func average(
     _ value: some SQLSpecificExpressible,
     filter: some SQLSpecificExpressible)
@@ -69,6 +69,32 @@ public func average(_ value: some SQLSpecificExpressible) -> SQLExpression {
 /// Related SQLite documentation: <https://www.sqlite.org/lang_expr.html#castexpr>
 public func cast(_ expression: some SQLSpecificExpressible, as storageClass: Database.StorageClass) -> SQLExpression {
     .cast(expression.sqlExpression, as: storageClass)
+}
+
+/// The `COALESCE` SQL function.
+///
+/// For example:
+///
+/// ```swift
+/// // COALESCE(value1, value2, ...)
+/// coalesce([Column("value1"), Column("value2"), ...])
+/// ```
+///
+/// Unlike the SQL function, `coalesce` accepts any number of arguments.
+/// When `values` is empty, the result is `NULL`. When `values` contains a
+/// single value, the result is this value. `COALESCE` is used from
+/// two values upwards.
+public func coalesce(_ values: some Collection<any SQLSpecificExpressible>) -> SQLExpression {
+    // SQLite COALESCE wants at least two arguments.
+    // There is no reason to apply the same limitation.
+    guard let value = values.first else {
+        return .null
+    }
+    if values.count > 1 {
+        return .function("COALESCE", values.map { $0.sqlExpression })
+    } else {
+        return value.sqlExpression
+    }
 }
 
 /// The `COUNT` SQL function.
@@ -145,7 +171,7 @@ public func max(
 /// // MAX(score) FILTER (WHERE score < 0)
 /// max(Column("score"), filter: Column("score") < 0)
 /// ```
-@available(iOS 14, macOS 10.16, tvOS 14, watchOS 7, *) // SQLite 3.30+
+@available(iOS 14, macOS 10.16, tvOS 14, *) // SQLite 3.30+
 public func max(
     _ value: some SQLSpecificExpressible,
     filter: some SQLSpecificExpressible)
@@ -190,7 +216,7 @@ public func min(
 /// // MIN(score) FILTER (WHERE score > 0)
 /// min(Column("score"), filter: Column("score") > 0)
 /// ```
-@available(iOS 14, macOS 10.16, tvOS 14, watchOS 7, *) // SQLite 3.30+
+@available(iOS 14, macOS 10.16, tvOS 14, *) // SQLite 3.30+
 public func min(
     _ value: some SQLSpecificExpressible,
     filter: some SQLSpecificExpressible)
@@ -248,7 +274,7 @@ public func sum(
 /// See also ``total(_:)``.
 ///
 /// Related SQLite documentation: <https://www.sqlite.org/lang_aggfunc.html#sumunc>.
-@available(iOS 14, macOS 10.16, tvOS 14, watchOS 7, *) // SQLite 3.30+
+@available(iOS 14, macOS 10.16, tvOS 14, *) // SQLite 3.30+
 public func sum(
     _ value: some SQLSpecificExpressible,
     filter: some SQLSpecificExpressible)
@@ -312,7 +338,7 @@ public func total(
 /// See also ``total(_:)``.
 ///
 /// Related SQLite documentation: <https://www.sqlite.org/lang_aggfunc.html#sumunc>.
-@available(iOS 14, macOS 10.16, tvOS 14, watchOS 7, *) // SQLite 3.30+
+@available(iOS 14, macOS 10.16, tvOS 14, *) // SQLite 3.30+
 public func total(
     _ value: some SQLSpecificExpressible,
     filter: some SQLSpecificExpressible)
